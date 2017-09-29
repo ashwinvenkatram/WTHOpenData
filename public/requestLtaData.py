@@ -12,7 +12,7 @@ jsonBusStops = []
 
 
 def dataMallQuery(urlReq,jsonBusStops):
-	#Each URL call on retrieves 50 datapoints params={'$skip': 50}).json()['value']
+	#Each URL call retrieves 50 datapoints. Hence params={'$skip': 50}).json()['value']
 	while True:
 		content = requests.get(
 			urlReq,
@@ -24,7 +24,9 @@ def dataMallQuery(urlReq,jsonBusStops):
 		else:
 			jsonBusStops += content
 
-
+def saveToFile(jsonObj,saveFile):
+	with open(saveFile,"w") as outfile:
+ 		json.dump(jsonObj, outfile, sort_keys=True, indent=4,ensure_ascii=False)
 
 if __name__=="__main__":
 	headers['AccountKey']=sys.argv[1]
